@@ -1,0 +1,11 @@
+<h2>Dragons 2</h2>
+<ul class='dragons'>
+  <li *ngFor="let dragon of dragons">
+    <a routerLink="/dragon/{{dragon.slug}}">
+      <span>{{dragon.type}}</span>
+      <span>{{dragon.name}}</span>
+    </a>
+    <button class="delete" title="delete" (click)="deleteDragon(dragon)">x</button>
+  </li>
+</ul>
+<a routerLink="/dragons/new"><button class="add" title="add dragon">Add a new dragon</button></a>

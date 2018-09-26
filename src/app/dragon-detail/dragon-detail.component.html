@@ -1,0 +1,19 @@
+<button (click)="goBack()">go back</button>
+<div *ngIf="dragon">
+  <h2>{{dragon.name}} Details comp</h2>
+  <div>
+    <label>type: 
+        <input [(ngModel)]="dragon.type" placeholder="type">
+    </label>
+  </div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="dragon.name" placeholder="name">
+    </label>
+  </div>
+  <div>
+    <span>created at: </span>{{dragon.created_at}}
+  </div>  
+</div>
+<button (click)="saveDragon()">save</button>
+<button (click)="addDragon()">add</button>
