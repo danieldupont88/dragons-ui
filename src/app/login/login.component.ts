@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   onLogin(username, password) {
-    console.log(this.username);
-    console.log(this.password);
     this.loginService.authenticate(this.username, this.password).subscribe(success => this.loginSuccess = success);
     this.router.navigate(['dragons']);
   }

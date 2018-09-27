@@ -21,7 +21,12 @@ export class DragonService {
 
   getDragons(): Observable<Dragons> {
     return this.http.get<Dragons>(this.dragonsApiUrl + '?page=2&size=200').pipe(
-      catchError(this.handleError('getDragons', new Dragons()))
+      map( result => {
+        const sortedItems = result.items.sort(this.nameCompare);
+        console.log('b' sortedItems);
+        result.items = result.items.sort(this.nameCompare);
+        return result; }),
+      catchError(this.handleError('getDragons', new Dragons())),
     );
   }
 
@@ -38,12 +43,12 @@ export class DragonService {
     );
   }
 
-  deleteDragon (dragon: Dragon | string): Observable<Dragon> {
+  deleteDragon (dragon: Dragon | string): Observable<boolean> {
     const slug = typeof dragon === 'string' ? dragon : dragon.slug;
     const url = `${this.dragonsApiUrl}/${slug}`;
 
-    return this.http.delete<Dragon>(url, httpOptions).pipe(
-      catchError(this.handleError<Dragon>('deleteDragon'))
+    return this.http.delete<boolean>(url, httpOptions).pipe(
+      catchError(this.handleError<boolean>('deleteDragon'))
     );
   }
 
@@ -55,6 +60,15 @@ export class DragonService {
     );
   }
 
+  private nameCompare(a: Dragon, b: Dragon) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
