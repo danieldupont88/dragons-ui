@@ -1,19 +1,60 @@
-<button (click)="goBack()">go back</button>
-<div *ngIf="dragon">
-  <h2>{{dragon.name}} Details comp</h2>
-  <div>
-    <label>type: 
-        <input [(ngModel)]="dragon.type" placeholder="type">
-    </label>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="container top-dragon-detail">
+      <div class="row">
+        <div class="col-md-6">
+          <button (click)="goBack()" class="btn btn-outline-primary">Go back</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="loadingIndicator" class="row justify-content-md-center">
+      <div class="loader"></div>
+    </div>
+
+    
+      <div class="col-md-6">
+        <form [formGroup]="dragonFormGroup" *ngIf="dragon" class="container login-container">
+          <div class="card detail-card">
+            <div class="row">
+              <div class="col dragons-col-spacing">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Name: </span>
+                  <input class="form-control" formControlName="name" placeholder="name">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col dragons-col-spacing">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Type: </span>
+                  <input class="form-control" formControlName="type" placeholder="type">
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="dragon.date">
+              <span>created at: </span>{{dragon.created_at}}
+            </div>
+            <div>
+              <span *ngIf="dragon.histories">
+                Histories:
+                <p *ngFor="let history of dragon.histories">{{history}}<p>
+              </span>
+            </div>
+            <div class="row">
+              <div class="col-md-6 dragons-col-spacing">
+
+                <button *ngIf="dragon.slug" (click)="saveDragon()" class="btn btn-primary">Save</button>
+                <button *ngIf="!dragon.slug" (click)="addDragon()" class="btn btn-primary">Add</button>
+                <button (click)="goBack()" class="btn btn-sm btn-outline-dark">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    
+
   </div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="dragon.name" placeholder="name">
-    </label>
-  </div>
-  <div>
-    <span>created at: </span>{{dragon.created_at}}
-  </div>  
 </div>
-<button (click)="saveDragon()">save</button>
-<button (click)="addDragon()">add</button>

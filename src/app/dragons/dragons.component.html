@@ -1,19 +1,30 @@
-
-<h3>Dragons List</h3>
-<div class="row">
-<a routerLink="/dragons/new" class="col-md-2">
-  <button type="button" class="btn btn-primary">Add a new dragon</button>
+<div class="container">
+  <div class="row justify-content-md-center"> 
+    <h5>Dragons</h5>
+  </div>
+  <div class="row justify-content-md-center"> 
+  <a routerLink="/dragons/new" class="col-md-2">
+    <button type="button" class="btn btn-primary">Add a new dragon</button>
   </a>
+  </div>
 </div>
 
-<div *ngFor="let dragon of dragons" class="card" style="width: 20rem;">
-  <div class="card-body">
-    <h5 class="card-title">Name: {{dragon.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Type: {{dragon.type}}</h6>
-    <a  routerLink="/dragon/{{dragon.slug}}" class="card-link">
-      <button type="button" class="btn btn-primary btn-sm">edit</button>
-    </a>
-    <button type="button" class="btn btn-primary btn-sm card-link" (click)="deleteDragon(dragon)" >delete</button>
-    
+<div *ngIf="loadingIndicator" class="row justify-content-md-center">
+  <div class="loader"></div>
+</div>
+
+<div *ngFor="let dragon of dragons" class="row justify-content-md-center">
+  <div class="col-md-6">
+    <div class="card dragon-card">
+      <div class="card-body">
+        <h5 class="card-title">Name: {{dragon.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Type: {{dragon.type}}</h6>
+        <p class="crated-date font-weight-light">Created at: {{ dragon.created_at.toLocaleString() }}</p>
+        <a routerLink="/dragon/{{dragon.slug}}" class="card-link">
+          <button type="button" class="btn btn-primary btn-sm">edit</button>
+        </a>
+        <button type="button" class="btn btn-primary btn-sm card-link" (click)="deleteDragon(dragon)">delete</button>
+      </div>
+    </div>
   </div>
 </div>

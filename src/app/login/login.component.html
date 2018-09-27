@@ -6,6 +6,9 @@
     <input type="text" id="inputEmail" class="form-control" placeholder="Username" [(ngModel)]="username">
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" [(ngModel)]="password">
     <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="onLogin()" >Sign in</button>    
+    <div *ngIf="loginError" class="alert alert-danger" role="alert">
+        Incorrect login or password. Hint: try using "user" / "pass"
+    </div>
   </div>
 </div>
 

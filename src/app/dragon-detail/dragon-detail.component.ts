@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Dragon } from '../dragon';
 import { DragonService } from '../dragon.service';
@@ -16,6 +17,13 @@ export class DragonDetailComponent implements OnInit {
 
   @Input() dragon: Dragon;
 
+  loadingIndicator: boolean;
+
+  dragonFormGroup = new FormGroup({
+    name:new FormControl(),
+    type:new FormControl(),
+  });
+
   constructor(
     private route: ActivatedRoute,
     private dragonService: DragonService,
@@ -23,8 +31,12 @@ export class DragonDetailComponent implements OnInit {
   ) { }
 
   getDragon(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.dragonService.getDragon(id).subscribe(dragon => this.dragon = dragon);
+    this.loadingIndicator = true;
+    const slug = this.route.snapshot.paramMap.get('id');
+    this.dragonService.getDragon(slug).subscribe(dragon => { 
+      this.dragon = dragon;
+      this.loadingIndicator = false;
+    });
   }
 
   goBack(): void {

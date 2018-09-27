@@ -1,0 +1,6 @@
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Dragons</span>
+    <div *ngIf="loginService.isAuthenticated()" class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" (click)="onLogoff()">Logout</button>
+    </div>
+</nav>

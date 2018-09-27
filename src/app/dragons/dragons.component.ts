@@ -10,9 +10,15 @@ import { DragonService } from '../dragon.service';
 export class DragonsComponent implements OnInit {
 
   dragons: Dragon[];
-
+  loadingIndicator: boolean;
+  
   getDragons(): void {
-    this.dragonService.getDragons().subscribe(response => this.dragons = response.items);
+    this.loadingIndicator = true;
+    this.dragonService.getDragons().subscribe(response => { 
+      response.items.map( i => { i.created_at = new Date(i.created_at)})
+      this.dragons = response.items 
+      this.loadingIndicator = false;
+    });
   }
 
   deleteDragon(dragon: Dragon): void {

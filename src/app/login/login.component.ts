@@ -10,10 +10,10 @@ import { LoginService } from 'src/app/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginSuccess: boolean;
+  loginError: boolean;
   username: string;
   password: string;
-
+  
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -21,17 +21,18 @@ export class LoginComponent implements OnInit {
   ) { }
 
   onLogin(username, password) {
-    console.log(this.username);
-    console.log(this.password);
-    this.loginService.authenticate(this.username, this.password).subscribe(success => this.loginSuccess = success);
+    this.loginService.authenticate(this.username, this.password)
+    .subscribe( success => this.loginError = !success);
     this.router.navigate(['dragons']);
   }
 
   onLogoff() {
     this.loginService.logoff();
+    this.router.navigate(['login']);
   }
 
   ngOnInit() {
+    this.loginError = false;
     if (this.loginService.isAuthenticated()) {
       this.router.navigate(['dragons']);
     }
