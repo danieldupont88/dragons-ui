@@ -1,11 +1,19 @@
-<h2>Dragons 2</h2>
-<ul class='dragons'>
-  <li *ngFor="let dragon of dragons">
-    <a routerLink="/dragon/{{dragon.slug}}">
-      <span>{{dragon.type}}</span>
-      <span>{{dragon.name}}</span>
+
+<h3>Dragons List</h3>
+<div class="row">
+<a routerLink="/dragons/new" class="col-md-2">
+  <button type="button" class="btn btn-primary">Add a new dragon</button>
+  </a>
+</div>
+
+<div *ngFor="let dragon of dragons" class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Name: {{dragon.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Type: {{dragon.type}}</h6>
+    <a  routerLink="/dragon/{{dragon.slug}}" class="card-link">
+      <button type="button" class="btn btn-primary btn-sm">edit</button>
     </a>
-    <button class="delete" title="delete" (click)="deleteDragon(dragon)">x</button>
-  </li>
-</ul>
-<a routerLink="/dragons/new"><button class="add" title="add dragon">Add a new dragon</button></a>
+    <button type="button" class="btn btn-primary btn-sm card-link" (click)="deleteDragon(dragon)" >delete</button>
+    
+  </div>
+</div>

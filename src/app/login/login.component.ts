@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { LoginService } from 'src/app/login.service';
 
 @Component({
@@ -8,17 +10,31 @@ import { LoginService } from 'src/app/login.service';
 })
 export class LoginComponent implements OnInit {
 
+  loginSuccess: boolean;
   username: string;
   password: string;
-  authToken: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private loginService: LoginService,
+  ) { }
 
-  onLogin() {
-    this.loginService.authenticate(this.username, this.password).subscribe(token => this.authToken = token);
+  onLogin(username, password) {
+    console.log(this.username);
+    console.log(this.password);
+    this.loginService.authenticate(this.username, this.password).subscribe(success => this.loginSuccess = success);
+    this.router.navigate(['dragons']);
+  }
+
+  onLogoff() {
+    this.loginService.logoff();
   }
 
   ngOnInit() {
+    if (this.loginService.isAuthenticated()) {
+      this.router.navigate(['dragons']);
+    }
   }
 
 }

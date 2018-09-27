@@ -20,7 +20,7 @@ export class DragonService {
   private dragonsApiUrl = 'https://dragons-api.herokuapp.com/api/dragons';
 
   getDragons(): Observable<Dragons> {
-    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=0&size=200').pipe(
+    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=2&size=200').pipe(
       catchError(this.handleError('getDragons', new Dragons()))
     );
   }

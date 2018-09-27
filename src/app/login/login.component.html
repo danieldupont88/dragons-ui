@@ -1,7 +1,11 @@
-<h2>Login</h2>
-<label>username
-  <input [(ngModel)]="username" placeholder="username">
-</label>
-<label>password
-  <input [(ngModel)]="password" type="password">
-</label>
+<div class="text-center">
+  <div class="form-signin">
+    <i class="fa fa-d-n-d"></i>
+    <h1 class="h3 mb-3 font-weight-normal">Dragons</h1>
+    <p>Please, sign in. </p>
+    <input type="text" id="inputEmail" class="form-control" placeholder="Username" [(ngModel)]="username">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" [(ngModel)]="password">
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="onLogin()" >Sign in</button>    
+  </div>
+</div>
+
