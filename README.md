@@ -1,27 +1,30 @@
 # DragonsUi
+Solução para o [teste](https://github.com/WoopSicredi/jobs/issues/6).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+## Para rodar a aplicação
+É necessario ter o nodejs, npm e angular-cli instalados.
 
-## Development server
+Clone o repositório em um diretório de sua preferência.
+As dependências do projeto são gerenciadas usando npm, então rode `npm install` para instalá-las.
+Rode `ng serve` e navegue para o endereço `http://localhost:4200/`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Para acesso, use as credenciais:
+- usuáruio: `user`
+- senha: `pass`
 
-## Code scaffolding
+# Observações sobre a solução
+A aplicação foi organizada utilizando os seguintes componentes:
+- app-header: cabeçalho, contém o nome da app e um botão de logoff (quando o usuário está logado) 
+- messages: footer do app, utilizado para exibir mensagens de erro, quando houver. 
+- login: form de login (rota: `/login`). O serviço de login apenas verifica usuário e senha e armazena um token no localStorage.
+- dragons: lista de dragões (rota: `/dragons`)    
+- dragon-detail: utilizado para edição dos detalhes de um dragão (rota: `/dragon/:slug`) ou criação de novos dragões (rota: `/dragons/new`)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Informações adicionais sobre o autor
+Este é meu primeiro contato com o Angular 6, aprendi tudo o que utilizei no teste nesses 3 dias que disponibilizei para faze-lo.
+Além disso, venho de um histórico de atuação de cerca de 2 anos com foco no backend em Java. Esse também é meu primeiro contato com TypeScript (Costumava trabalhar com vanilla JavaScript e angular 1.4.x).
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### API
+A [API](https://dragons-api.herokuapp.com/) utilizada possui algumas falhas:
+- Há registros inseridos sem nome, tipo ou slug, o que impossibilita sua deleção.
+- Há uma issue no número de resultados paginados. Apesar de aceitar parâmetros `size` e `page` verifiquei o [código fonte](https://github.com/wbruno/dragons-api/blob/master/controllers/DragonController.js) da API e o número do resultado inicial é sempre baseado em páginas de tamanho 10, mesmo quando informado tamanhos maiores.

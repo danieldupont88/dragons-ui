@@ -25,7 +25,6 @@ export class LoginService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    console.log(token);
     return AUTH_TOKEN === token;
   }
 

@@ -1,19 +1,25 @@
-
-<h3>Dragons List</h3>
-<div class="row">
-<a routerLink="/dragons/new" class="col-md-2">
-  <button type="button" class="btn btn-primary">Add a new dragon</button>
-  </a>
+<div class="d-flex justify-content-center dragon-add-btn">
+    <a routerLink="/dragons/new">
+      <button mat-raised-button color="primary">ADD NEW DRAGON</button>
+    </a>
 </div>
 
-<div *ngFor="let dragon of dragons" class="card" style="width: 20rem;">
-  <div class="card-body">
-    <h5 class="card-title">Name: {{dragon.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Type: {{dragon.type}}</h6>
-    <a  routerLink="/dragon/{{dragon.slug}}" class="card-link">
-      <button type="button" class="btn btn-primary btn-sm">edit</button>
-    </a>
-    <button type="button" class="btn btn-primary btn-sm card-link" (click)="deleteDragon(dragon)" >delete</button>
-    
+<div *ngFor="let dragon of dragons" class="row justify-content-md-center">
+  <div class="col-md-6">
+    <mat-card class="dragon-card">
+      <mat-card-header>
+        <mat-card-title> {{dragon.name}} </mat-card-title>
+        <mat-card-subtitle> {{dragon.type}} </mat-card-subtitle>
+        <mat-card-subtitle class="dragon-date-font"> Created at: {{ dragon.created_at.toLocaleString() }} </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-button (click)="editDragon(dragon)">EDIT</button>
+        <button mat-button (click)="deleteDragon(dragon)">DELETE</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
+</div>
+
+<div *ngIf="loadingIndicator" class="row justify-content-md-center">
+  <div class="loader"></div>
 </div>

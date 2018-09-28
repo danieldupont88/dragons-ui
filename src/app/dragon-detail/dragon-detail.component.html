@@ -1,19 +1,46 @@
-<button (click)="goBack()">go back</button>
-<div *ngIf="dragon">
-  <h2>{{dragon.name}} Details comp</h2>
-  <div>
-    <label>type: 
-        <input [(ngModel)]="dragon.type" placeholder="type">
-    </label>
+<div class="dragon-detail">
+  <div class="row justify-content-md-center">
+    <div *ngIf="loadingIndicator" class="row justify-content-md-center">
+      <div class="loader"></div>
+    </div>
+    <div class="col-md-6" *ngIf="dragon">
+      <mat-card class="dragon-card">
+        <mat-card-title>New Dragon</mat-card-title>
+        <mat-card-content>
+          <mat-form-field class="full-input">
+            <input matInput placeholder="Dragon name" [formControl]="name" required>
+            <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-input">
+            <input matInput placeholder="Dragon type" [formControl]="type">
+          </mat-form-field>
+          
+          <mat-card-subtitle class="histories"> Histories: </mat-card-subtitle>
+          <mat-list *ngIf="dragon.histories">
+            <mat-list-item class="full-input" *ngFor="let history of dragon.histories">
+                <h3 matLine> {{history}} </h3>                
+                <button mat-icon-button (click)="removeHistory(history)">
+                  <mat-icon matListIcon>delete</mat-icon>
+                </button>
+            </mat-list-item>
+          </mat-list>
+          <p *ngIf="!dragon.histories || !dragon.histories.length">This dragon has no histories currently...</p>
+
+          <mat-form-field class="small-input">
+              <input matInput placeholder="Add Histories" [formControl]="history">              
+          </mat-form-field>
+          <button mat-icon-button (click)="addHistory(history.value)">
+              <mat-icon>add</mat-icon>
+          </button>
+          
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="submit" *ngIf="dragon.slug" (click)="saveDragon(name.value, type.value, history.value)" mat-button>SAVE</button>
+          <button type="submit" *ngIf="!dragon.slug" (click)="saveDragon(name.value, type.value, history.value)" mat-button>ADD</button>
+          <button (click)="goBack()" mat-button>CANCEL</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
   </div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="dragon.name" placeholder="name">
-    </label>
-  </div>
-  <div>
-    <span>created at: </span>{{dragon.created_at}}
-  </div>  
 </div>
-<button (click)="saveDragon()">save</button>
-<button (click)="addDragon()">add</button>

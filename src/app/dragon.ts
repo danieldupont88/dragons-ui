@@ -5,4 +5,5 @@ export class Dragon {
     created_at: Date;
     slug: string;
     __v: number;
+    histories: string[];
 }

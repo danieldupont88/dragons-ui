@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Dragon } from '../dragon';
 import { DragonService } from '../dragon.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dragons',
@@ -11,9 +12,16 @@ import { Router } from '@angular/router';
 export class DragonsComponent implements OnInit {
 
   dragons: Dragon[];
+  loadingIndicator: boolean;
 
   getDragons(): void {
-    this.dragonService.getDragons().subscribe(response => {  console.log(response); this.dragons = response.items; });
+    this.loadingIndicator = true;
+    this.dragonService.getDragons().subscribe(response => {
+      response.items.map( i => { i.created_at = new Date(i.created_at);
+    });
+      this.dragons = response.items;
+      this.loadingIndicator = false;
+    });
   }
 
   deleteDragon(dragon: Dragon): void {
@@ -21,8 +29,13 @@ export class DragonsComponent implements OnInit {
     this.dragons = this.dragons.filter(d => d !== dragon);
   }
 
+  editDragon(dragon: Dragon): void {
+    this.router.navigate(['dragon/' + dragon.slug]);
+  }
+
   constructor(
-    private dragonService: DragonService
+    private dragonService: DragonService,
+    private router: Router,
   ) { }
 
   ngOnInit() {

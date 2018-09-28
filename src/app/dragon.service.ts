@@ -19,11 +19,15 @@ export class DragonService {
 
   private dragonsApiUrl = 'https://dragons-api.herokuapp.com/api/dragons';
 
+  /* @TODO: Pagination on getDragons().
+     As of now, there is a limitation on the API, the content can't be sorted on server side.
+     Current state of the API also contains multiple Dragon objects with no name, type or slug.
+     Due to that we are querying for the second result page here.
+  */
   getDragons(): Observable<Dragons> {
-    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=2&size=200').pipe(
+    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=0&size=200').pipe(
       map( result => {
         const sortedItems = result.items.sort(this.nameCompare);
-        console.log('b' sortedItems);
         result.items = result.items.sort(this.nameCompare);
         return result; }),
       catchError(this.handleError('getDragons', new Dragons())),
