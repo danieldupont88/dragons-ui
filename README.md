@@ -14,7 +14,7 @@ Para acesso, use as credenciais:
 
 # Observações sobre a solução
 A aplicação foi organizada utilizando os seguintes componentes:
-- app-header: cabeçalho, contém o nome da app e um botão de logoff (quando o usuário está logado) 
+- app-header: cabeçalho, contém o nome da app e um botão de logoff (exibido apenas quando o usuário está logado) 
 - messages: footer do app, utilizado para exibir mensagens de erro, quando houver. 
 - login: form de login (rota: `/login`). O serviço de login apenas verifica usuário e senha e armazena um token no localStorage.
 - dragons: lista de dragões (rota: `/dragons`)    
