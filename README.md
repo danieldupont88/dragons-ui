@@ -21,7 +21,7 @@ A aplicação foi organizada utilizando os seguintes componentes:
 - dragon-detail: utilizado para edição dos detalhes de um dragão (rota: `/dragon/:slug`) ou criação de novos dragões (rota: `/dragons/new`)
 
 ## Informações adicionais sobre o autor
-Este é meu primeiro contato com o Angular 6, aprendi tudo o que utilizei no teste nesses 3 dias que disponibilizei para faze-lo.
+Este é meu primeiro contato com o Angular 6, aprendi tudo o que utilizei no teste nesses 3 dias que disponibilizei para fazer o teste.
 Além disso, venho de um histórico de atuação de cerca de 2 anos com foco no backend em Java. Esse também é meu primeiro contato com TypeScript (Costumava trabalhar com vanilla JavaScript e angular 1.4.x).
 
 ### API
