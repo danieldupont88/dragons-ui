@@ -25,7 +25,7 @@ export class DragonService {
      Due to that we are querying for the second result page here.
   */
   getDragons(): Observable<Dragons> {
-    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=0&size=200').pipe(
+    return this.http.get<Dragons>(this.dragonsApiUrl + '?page=2&size=200').pipe(
       map( result => {
         const sortedItems = result.items.sort(this.nameCompare);
         result.items = result.items.sort(this.nameCompare);
@@ -86,7 +86,7 @@ export class DragonService {
   }
 
   private log(message: string) {
-    this.messageService.add(`DragonService: ${message}`);
+    this.messageService.add('An error ouccoured.');
   }
 
   constructor(
